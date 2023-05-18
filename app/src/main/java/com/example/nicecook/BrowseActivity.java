@@ -62,15 +62,19 @@ public class BrowseActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     replaceFragment(new HomeFragment());
+                    navigationView.setCheckedItem(R.id.nav_home);
                     break;
                 case R.id.favorites:
                     replaceFragment(new FavoritesFragment());
+                    navigationView.setCheckedItem(R.id.nav_favorites);
                     break;
                 case R.id.notes:
                     replaceFragment(new NotesFragment());
+                    navigationView.setCheckedItem(R.id.nav_notes);
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
+                    navigationView.setCheckedItem(R.id.nav_profile);
                     break;
             }
 
@@ -83,15 +87,19 @@ public class BrowseActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
                         replaceFragment(new HomeFragment());
+                        bottomNavigationView.setSelectedItemId(R.id.home);
                         break;
                     case R.id.nav_favorites:
                         replaceFragment(new FavoritesFragment());
+                        bottomNavigationView.setSelectedItemId(R.id.favorites);
                         break;
                     case R.id.nav_notes:
                         replaceFragment(new NotesFragment());
+                        bottomNavigationView.setSelectedItemId(R.id.notes);
                         break;
                     case R.id.nav_profile:
                         replaceFragment(new ProfileFragment());
+                        bottomNavigationView.setSelectedItemId(R.id.profile);
                         break;
                     case R.id.nav_logout:
                         Toast.makeText(BrowseActivity.this, "Logout", Toast.LENGTH_SHORT).show();

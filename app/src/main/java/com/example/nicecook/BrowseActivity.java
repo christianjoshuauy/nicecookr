@@ -1,5 +1,6 @@
 package com.example.nicecook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -39,6 +41,7 @@ public class BrowseActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.bringToFront();
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -74,6 +77,31 @@ public class BrowseActivity extends AppCompatActivity {
             return true;
         });
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        replaceFragment(new HomeFragment());
+                        break;
+                    case R.id.nav_favorites:
+                        replaceFragment(new FavoritesFragment());
+                        break;
+                    case R.id.nav_notes:
+                        replaceFragment(new NotesFragment());
+                        break;
+                    case R.id.nav_profile:
+                        replaceFragment(new ProfileFragment());
+                        break;
+                    case R.id.nav_logout:
+                        Toast.makeText(BrowseActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
+                return true;
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +109,7 @@ public class BrowseActivity extends AppCompatActivity {
             }
         });
     }
+
     private  void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

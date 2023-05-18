@@ -9,21 +9,21 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_outline_home_24"
+            android:icon="@drawable/img_volume"
             android:title="Home"/>
 
         <item
-            android:id="@+id/nav_settings"
+            android:id="@+id/nav_favorites"
             android:icon="@drawable/img_bookmark_gray_918"
-            android:title="Settings"/>
+            android:title="Favorites"/>
 
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/nav_notes"
             android:icon="@drawable/img_notebooklight"
             android:title="Notes"/>
 
         <item
-            android:id="@+id/nav_about"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/img_search_bluegray_100"
             android:title="Profile"/>
     </group>

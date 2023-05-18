@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -26,21 +28,37 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class BrowseActivity extends AppCompatActivity {
+    FirebaseAuth auth;
+    FirebaseUser user;
     FloatingActionButton fab;
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
+    TextView emailAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View view = navigationView.getHeaderView(0);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        emailAddress = view.findViewById(R.id.emailAddress);
+        if(user == null) {
+            Intent intent = new Intent(BrowseActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            emailAddress.setText(user.getEmail());
+        }
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         fab = findViewById(R.id.fab);
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -102,7 +120,8 @@ public class BrowseActivity extends AppCompatActivity {
                         bottomNavigationView.setSelectedItemId(R.id.profile);
                         break;
                     case R.id.nav_logout:
-                        Toast.makeText(BrowseActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+                        signOut();
+                        Toast.makeText(BrowseActivity.this, "Signed Out", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -116,6 +135,13 @@ public class BrowseActivity extends AppCompatActivity {
                 showBottomDialog();
             }
         });
+    }
+
+    private void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(BrowseActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private  void replaceFragment(Fragment fragment) {

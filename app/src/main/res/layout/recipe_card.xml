@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="164dp"
             android:scaleType="fitXY"
-            android:background="@drawable/img_rectangle646_143x315"
             style="@style/groupStylecornerRadius" />
 
         <LinearLayout

@@ -1,182 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/dialogbg">
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_round_remove_24"
-        android:layout_gravity="center|top"
-        android:scaleType="centerCrop"/>
-
+    android:layout_height="match_parent">
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="@drawable/dialogbg"
+        >
 
-        <TextView
-            android:id="@+id/createText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
-            android:text="@string/lbl_add_recipes"
-            android:padding="8dp"
-            android:textColor="@color/black_900"
-            android:layout_marginStart="12dp"
-            android:textSize="25dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_clear_24"
-            android:layout_gravity="center"
-            android:layout_marginLeft="190dp"
-            android:id="@+id/cancelButton"/>
+            android:src="@drawable/ic_round_remove_24"
+            android:layout_gravity="center|top"
+            android:scaleType="centerCrop"/>
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lbl_recipe_name"
-            style="@style/txtPoppinssemibold14_3"
-            android:layout_marginBottom="7dp"
-            android:textColor="@color/black_900"
-            android:textSize="16sp"/>
-
-        <EditText
-            android:id="@+id/recipeName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/msg_enter_recipe_na"
-            android:textColorHint="@color/bluegray_100"
-            android:textColor="@color/black_900"
-            android:padding="10dp"
-            style="@style/etSolidRoundedOutline"/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/createText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:text="@string/lbl_add_recipes"
+                android:padding="8dp"
+                android:textColor="@color/black_900"
+                android:layout_marginStart="12dp"
+                android:textSize="25dp" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_clear_24"
+                android:layout_gravity="center"
+                android:layout_marginLeft="190dp"
+                android:id="@+id/cancelButton"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lbl_ingredients"
-            style="@style/txtPoppinssemibold14_3"
-            android:layout_marginBottom="7dp"
-            android:textColor="@color/black_900"
-            android:textSize="16sp"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/recipeIngredients"
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/recipeImage"
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:scaleType="fitXY"
+                style="@style/groupStylecornerRadius"
+                />
+
+            <LinearLayout
+                android:id="@+id/btnUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/white_border"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_outline_image_24"
+                    android:backgroundTint="@color/white"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/txtPoppinsmedium11"
+                    android:text="@string/lbl_upload_image"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lbl_add_ingredient"
-            android:textColorHint="@color/bluegray_100"
-            android:textColor="@color/black_900"
-            android:padding="10dp"
-            style="@style/etSolidRoundedOutline"/>
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_recipe_name"
+                style="@style/txtPoppinssemibold14_3"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/black_900"
+                android:textSize="16sp"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:padding="10dp">
+            <EditText
+                android:id="@+id/recipeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/msg_enter_recipe_na"
+                android:textColorHint="@color/bluegray_100"
+                android:textColor="@color/black_900"
+                android:padding="10dp"
+                style="@style/etSolidRoundedOutline"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lbl_procedures"
-            style="@style/txtPoppinssemibold14_3"
-            android:layout_marginBottom="7dp"
-            android:textColor="@color/black_900"
-            android:textSize="16sp"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/recipeProcedure"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lbl_add_step"
-            android:textColorHint="@color/bluegray_100"
-            android:textColor="@color/black_900"
-            android:padding="10dp"
-            style="@style/etSolidRoundedOutline"/>
+            android:padding="10dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_ingredients"
+                style="@style/txtPoppinssemibold14_3"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/black_900"
+                android:textSize="16sp"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="30dp">
+            <EditText
+                android:id="@+id/recipeIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_add_ingredient"
+                android:textColorHint="@color/bluegray_100"
+                android:textColor="@color/black_900"
+                android:padding="10dp"
+                style="@style/etSolidRoundedOutline"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            style="@style/txtPoppinssemibold14_3"
-            android:layout_marginBottom="7dp"
-            android:textColor="@color/black_900"
-            android:textSize="16sp"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/recipeDuration"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Duration in minutes"
-            android:textColorHint="@color/bluegray_100"
-            android:textColor="@color/black_900"
-            android:padding="10dp"
-            style="@style/etSolidRoundedOutline"/>
+            android:padding="10dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_procedures"
+                style="@style/txtPoppinssemibold14_3"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/black_900"
+                android:textSize="16sp"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp">
+            <EditText
+                android:id="@+id/recipeProcedure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_add_step"
+                android:textColorHint="@color/bluegray_100"
+                android:textColor="@color/black_900"
+                android:padding="10dp"
+                style="@style/etSolidRoundedOutline"/>
 
-    <LinearLayout
-        android:id="@+id/btnConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/groupStylegray_900cornerRadius"
-        android:paddingVertical="15dp"
-        >
-        <TextView android:ellipsize="end"
-            android:id="@+id/txtLabelTwo"
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:gravity="center"
-            android:layout_width="0dp" android:singleLine="true"
-            android:text="Confirm"
-            style="@style/txtPoppinssemibold16_1"/>
-    </LinearLayout>
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                style="@style/txtPoppinssemibold14_3"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/black_900"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/recipeDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Duration in minutes"
+                android:textColorHint="@color/bluegray_100"
+                android:textColor="@color/black_900"
+                android:padding="10dp"
+                style="@style/etSolidRoundedOutline"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/btnConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/groupStylegray_900cornerRadius"
+                android:paddingVertical="15dp"
+                >
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtLabelTwo"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:layout_width="0dp" android:singleLine="true"
+                    android:text="Confirm"
+                    style="@style/txtPoppinssemibold16_1"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

@@ -6,6 +6,15 @@ public class Recipe {
     private int time;
     private String ingredients;
     private String procedure;
+    private String imageFile;
+
+    public String getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(String imageFile) {
+        this.imageFile = imageFile;
+    }
 
     public String getIngredients() {
         return ingredients;
@@ -26,12 +35,13 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String title, String author, int time, String ingredients, String procedure) {
+    public Recipe(String title, String author, int time, String ingredients, String procedure, String imageFile) {
         this.title = title;
         this.author = author;
         this.time = time;
         this.ingredients = ingredients;
         this.procedure = procedure;
+        this.imageFile = imageFile;
     }
 
     public String getTitle() {

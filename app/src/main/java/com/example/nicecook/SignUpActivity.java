@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView txtName;
@@ -102,7 +104,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                task.getResult().getUser().getUid();
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                                String id = task.getResult().getUser().getUid();
+                                User user = new User(id, name);
+                                databaseReference.push().setValue(user);
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully",
                                         Toast.LENGTH_SHORT).show();
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();

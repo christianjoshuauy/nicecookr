@@ -1,14 +1,17 @@
 package com.example.nicecook;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -25,15 +28,28 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class BrowseActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -44,6 +60,9 @@ public class BrowseActivity extends AppCompatActivity {
     TextView userName;
     TextView emailAddress;
     DatabaseReference databaseReference;
+    StorageReference storageReference;
+    Uri imageUri;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +80,27 @@ public class BrowseActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-//            userName.setText(user.getDisplayName());
+            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users");
+            userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        String userId = childSnapshot.child("id").getValue(String.class);
+                        if (userId != null && userId.equals(user.getUid())) {
+                            String name = childSnapshot.child("name").getValue(String.class);
+                            if (name != null) {
+                                userName.setText(name);
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(BrowseActivity.this, "Failed to fetch user name", Toast.LENGTH_SHORT).show();
+                }
+            });
             emailAddress.setText(user.getEmail());
         }
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -152,16 +191,55 @@ public class BrowseActivity extends AppCompatActivity {
         finish();
     }
 
-    private  void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
 
+    private void selectImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 100);
+    }
+
+    private String uploadImage() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+        Date now = new Date();
+        String fileName = format.format(now) + ".jpg";
+        storageReference = FirebaseStorage.getInstance().getReference("images/" + fileName);
+        storageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                ImageView imageView = dialog.findViewById(R.id.recipeImage);
+                imageView.setImageURI(null);
+                Toast.makeText(BrowseActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(BrowseActivity.this, "Upload Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return fileName;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100 && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            ImageView imageView = dialog.findViewById(R.id.recipeImage);
+            Glide.with(this).load(imageUri).into(imageView);
+        }
+    }
+
     private void showBottomDialog() {
 
-        final Dialog dialog = new Dialog(this);
+        dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheet);
 
@@ -171,24 +249,33 @@ public class BrowseActivity extends AppCompatActivity {
         TextView recipeDuration = dialog.findViewById(R.id.recipeDuration);
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
         LinearLayout btnConfirm = dialog.findViewById(R.id.btnConfirm);
+        LinearLayout btnUpload = dialog.findViewById(R.id.btnUpload);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
+                    String fileName = uploadImage();
                     String title = recipeName.getText().toString();
+                    String author = user.getUid();
                     String ingredients = recipeIngredients.getText().toString();
                     String procedure = recipeProcedure.getText().toString();
                     int duration = Integer.parseInt(recipeDuration.getText().toString());
-                    Recipe recipe = new Recipe(title, user.getEmail(), duration, ingredients, procedure);
-
+                    Recipe recipe = new Recipe(title, author, duration, ingredients, procedure, fileName);
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
                     databaseReference.push().setValue(recipe);
                     Toast.makeText(BrowseActivity.this, "Added Recipe", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } catch (Exception e) {
                     Toast.makeText(BrowseActivity.this, "Adding Failed", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
             }
         });
 
@@ -199,11 +286,11 @@ public class BrowseActivity extends AppCompatActivity {
             }
         });
 
+
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
     }
 }

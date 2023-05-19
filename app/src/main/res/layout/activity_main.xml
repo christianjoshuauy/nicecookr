@@ -20,9 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="34dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="33dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="34dp"
             android:orientation="vertical">
 
             <ImageView
@@ -54,7 +53,7 @@
             <TextView
                 android:id="@+id/txtHeadertitle"
                 style="@style/txtPoppinssemibold50"
-                android:textSize="50sp"
+                android:textSize="47sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

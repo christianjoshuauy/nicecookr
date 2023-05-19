@@ -102,6 +102,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                task.getResult().getUser().getUid();
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully",
                                         Toast.LENGTH_SHORT).show();
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();

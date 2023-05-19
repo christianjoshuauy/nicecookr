@@ -22,93 +22,160 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="viewStart"
-            android:text="Create"
+            android:text="@string/lbl_add_recipes"
             android:padding="8dp"
             android:textColor="@color/black_900"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="5dp"
             android:textSize="25dp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_clear_24"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="190dp"
             android:id="@+id/cancelButton"/>
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:id="@+id/layoutProfile"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_search_bluegray_100"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/lbl_recipe_name"
+            style="@style/txtPoppinssemibold14_3"
+            android:layout_marginBottom="7dp"
             android:textColor="@color/black_900"
-            android:layout_marginLeft="30dp"
             android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/recipeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/msg_enter_recipe_na"
+            android:textColorHint="@color/bluegray_100"
+            android:textColor="@color/black_900"
+            android:padding="10dp"
+            style="@style/etSolidRoundedOutline"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutTBD"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_search_bluegray_100"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TBD"
+            android:text="@string/lbl_ingredients"
+            style="@style/txtPoppinssemibold14_3"
+            android:layout_marginBottom="7dp"
             android:textColor="@color/black_900"
-            android:layout_marginLeft="30dp"
             android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/recipeIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lbl_add_ingredient"
+            android:textColorHint="@color/bluegray_100"
+            android:textColor="@color/black_900"
+            android:padding="10dp"
+            style="@style/etSolidRoundedOutline"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutSignOut"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_procedures"
+            style="@style/txtPoppinssemibold14_3"
+            android:layout_marginBottom="7dp"
+            android:textColor="@color/black_900"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/recipeProcedure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lbl_add_step"
+            android:textColorHint="@color/bluegray_100"
+            android:textColor="@color/black_900"
+            android:padding="10dp"
+            style="@style/etSolidRoundedOutline"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="30dp">
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_exit_to_app_24"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Out"
+            android:text="Duration"
+            style="@style/txtPoppinssemibold14_3"
+            android:layout_marginBottom="7dp"
             android:textColor="@color/black_900"
-            android:layout_marginLeft="30dp"
             android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/recipeDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Duration in minutes"
+            android:textColorHint="@color/bluegray_100"
+            android:textColor="@color/black_900"
+            android:padding="10dp"
+            style="@style/etSolidRoundedOutline"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/groupStylegray_900cornerRadius"
+        android:paddingVertical="15dp"
+        >
+        <TextView android:ellipsize="end"
+            android:id="@+id/txtLabelTwo"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:layout_width="0dp" android:singleLine="true"
+            android:text="Confirm"
+            style="@style/txtPoppinssemibold16_1"/>
+    </LinearLayout>
 
     </LinearLayout>
 

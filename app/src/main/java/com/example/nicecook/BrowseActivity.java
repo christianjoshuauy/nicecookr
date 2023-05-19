@@ -30,6 +30,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class BrowseActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -37,7 +41,9 @@ public class BrowseActivity extends AppCompatActivity {
     FloatingActionButton fab;
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
+    TextView userName;
     TextView emailAddress;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +54,14 @@ public class BrowseActivity extends AppCompatActivity {
         View view = navigationView.getHeaderView(0);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
+        userName = view.findViewById(R.id.userName);
         emailAddress = view.findViewById(R.id.emailAddress);
         if(user == null) {
             Intent intent = new Intent(BrowseActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         } else {
+//            userName.setText(user.getDisplayName());
             emailAddress.setText(user.getEmail());
         }
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -157,38 +165,30 @@ public class BrowseActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheet);
 
-        LinearLayout profileLayout = dialog.findViewById(R.id.layoutProfile);
-        LinearLayout TBDlayout = dialog.findViewById(R.id.layoutTBD);
-        LinearLayout signOutLayout = dialog.findViewById(R.id.layoutSignOut);
+        TextView recipeName = dialog.findViewById(R.id.recipeName);
+        TextView recipeIngredients = dialog.findViewById(R.id.recipeIngredients);
+        TextView recipeProcedure = dialog.findViewById(R.id.recipeProcedure);
+        TextView recipeDuration = dialog.findViewById(R.id.recipeDuration);
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+        LinearLayout btnConfirm = dialog.findViewById(R.id.btnConfirm);
 
-        profileLayout.setOnClickListener(new View.OnClickListener() {
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                try {
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
+                    String title = recipeName.getText().toString();
+                    String ingredients = recipeIngredients.getText().toString();
+                    String procedure = recipeProcedure.getText().toString();
+                    int duration = Integer.parseInt(recipeDuration.getText().toString());
+                    Recipe recipe = new Recipe(title, user.getEmail(), duration, ingredients, procedure);
 
-                dialog.dismiss();
-                Toast.makeText(BrowseActivity.this,"Upload a Video is clicked",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        TBDlayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(BrowseActivity.this,"Create a short is Clicked",Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        signOutLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(BrowseActivity.this,"Go live is Clicked",Toast.LENGTH_SHORT).show();
-
+                    databaseReference.push().setValue(recipe);
+                    Toast.makeText(BrowseActivity.this, "Added Recipe", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                } catch (Exception e) {
+                    Toast.makeText(BrowseActivity.this, "Adding Failed", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

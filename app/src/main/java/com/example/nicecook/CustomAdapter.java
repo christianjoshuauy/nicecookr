@@ -35,6 +35,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.title.setText(recipe.getTitle());
         holder.author.setText(recipe.getAuthor());
         holder.time.setText(recipe.getTime() + " mins");
+        if(position == list.size() - 1) {
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+            params.bottomMargin = 200;
+            holder.itemView.setLayoutParams(params);
+        }
     }
 
     @Override

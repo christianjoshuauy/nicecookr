@@ -28,13 +28,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         return new CustomViewHolder(view);
     }
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         Recipe recipe = list.get(position);
         holder.title.setText(recipe.getTitle());
         holder.author.setText(recipe.getAuthor());
-        holder.time.setText(String.format("%d", recipe.getTime()));
+        holder.time.setText(recipe.getTime() + " mins");
     }
 
     @Override

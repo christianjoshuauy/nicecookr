@@ -80,6 +80,17 @@
             app:layout_constraintTop_toBottomOf="@+id/linearRowsearch"
             tools:text="@string/lbl_recent_search" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRecentSearch" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

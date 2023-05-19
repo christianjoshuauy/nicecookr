@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "946156951821",
-    "project_id": "nicecookr",
-    "storage_bucket": "nicecookr.appspot.com"
+    "project_number": "1030106505005",
+    "project_id": "nicecookr-d8633",
+    "storage_bucket": "nicecookr-d8633.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:946156951821:android:c3cf74728e858352d33844",
+        "mobilesdk_app_id": "1:1030106505005:android:0eca69ff163a548ff83da4",
         "android_client_info": {
           "package_name": "com.example.nicecook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "946156951821-4gi7o188tq1vlchj5a25nl451frnjuas.apps.googleusercontent.com",
+          "client_id": "1030106505005-5gen6lihm1covn31r2fb86htjpdppaim.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYakj-alVASMJAyvu-2Vc6GRAo7s-uYkI"
+          "current_key": "AIzaSyDwqTgMSarUSHH8gKxucc9jPjSC-OStzhQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "946156951821-4gi7o188tq1vlchj5a25nl451frnjuas.apps.googleusercontent.com",
+              "client_id": "1030106505005-5gen6lihm1covn31r2fb86htjpdppaim.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

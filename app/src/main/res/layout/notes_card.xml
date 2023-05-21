@@ -37,7 +37,7 @@
                 style="@style/txtPoppinsregular11_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textsize="11sp"
+
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:text="@string/lbl_calderetades" />

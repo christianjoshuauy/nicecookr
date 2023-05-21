@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         C_Notes notes = list.get(position);
-        holder.noteName.setText(notes.getNotesName());
+        holder.notesName.setText(notes.getNotesName());
         holder.description.setText(notes.getDescription());
         holder.time.setText(notes.getTime());
     }
@@ -44,11 +44,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView noteName,description,time;
+        TextView notesName,description,time;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            noteName = itemView.findViewById(R.id.txtCaldereta);
+            notesName= itemView.findViewById(R.id.txtCaldereta);
             description = itemView.findViewById(R.id.txtLabelOne);
             time = itemView.findViewById(R.id.txtTime);
         }

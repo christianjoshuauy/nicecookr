@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout android:gravity="end"
+        android:id="@+id/linearColumnfillfive"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical" style="@style/groupStylewhite_3">
+        <ImageView android:id="@+id/btnClose"
+            android:layout_height="10dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_fill5"/>
+        <TextView android:ellipsize="end"
+            android:id="@+id/txtLanguage"
+            android:layout_gravity="start"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="181dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="1dp"
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:text="@string/lbl_recipe_link"
+            style="@style/txtPoppinssemibold20"/>
+        <TextView android:gravity="start"
+            android:id="@+id/txtLanguageOne"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:text="@string/msg_copy_recipe_lin"
+            style="@style/txtPoppinsregular11_4"/>
+        <FrameLayout android:id="@+id/frameStackweburl"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="43dp"
+            android:layout_marginBottom="19dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="280dp" style="@style/groupStylecornerRadius_5">
+            <LinearLayout
+                android:id="@+id/linearColumnweburl"
+                android:layout_gravity="start"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical" style="@style/groupStylebluegray_100_1">
+                <TextView android:ellipsize="end"
+                    android:gravity="start"
+                    android:id="@+id/txtWeburl"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:text="@string/msg_nicecookr_recip"
+                    style="@style/txtPoppinsmedium11_2"/>
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:ellipsize="end"
+                android:gravity="center"
+                android:id="@+id/btnCopyLink"
+                android:layout_gravity="end"
+                android:layout_height="43dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="100dp"
+                android:paddingVertical="13dp"
+                android:paddingHorizontal="15dp"
+                android:singleLine="true"
+                android:text="@string/lbl_copy_link"
+                android:textAllCaps="false"
+                style="@style/btnSolidRounded_1"/>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

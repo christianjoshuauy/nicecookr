@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="14dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_arrowleft"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/img_arrowleft" />
+                <ImageView android:id="@+id/btnShare"
+                    android:layout_height="4dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="260dp"
+                    android:layout_width="18dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_union_black_900"
+                    tools:ignore="ContentDescription" tools:src="@drawable/img_union_black_900"/>
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/frameLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardMaxElevation="8dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarToolbar">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/detailImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="164dp"
+                    android:scaleType="fitXY"
+                    style="@style/groupStylecornerRadius"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="21dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="bottom|end"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/linearTime"
+                        style="@style/groupStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.71"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageClock"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/img_clock"
+                            tools:ignore="ContentDescription"
+                            tools:src="@drawable/img_clock" />
+
+                        <TextView
+                            android:id="@+id/detailTime"
+                            style="@style/txtPoppinsregular11"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_weight="0.73"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            tools:text="@string/lbl_20_min" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/btnAddFavorite"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/rectangle_bg_white_a700_radius_12"
+                        android:padding="5dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/img_computer"
+                        tools:ignore="ContentDescription" />
+                    <ImageButton
+                        android:id="@+id/btnRemoveFavorite"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/rectangle_bg_white_a700_radius_12"
+                        android:padding="5dp"
+                        android:visibility="gone"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/img_bookmark"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/detailTitle"
+            style="@style/txtPoppinssemibold14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_roasted_ribs_wi"
+            android:layout_marginTop="9dp"
+            android:layout_marginHorizontal="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+
+        <LinearLayout
+            android:id="@+id/linearCreator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailTitle">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"
+                android:background="@drawable/img_unsplashij24uq"/>
+
+            <TextView
+                android:id="@+id/detailAuthor"
+                style="@style/txtPoppinssemibold14_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="11dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/lbl_laura_omcm" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearRowprocedure"
+            style="@style/groupStylewhite_A700"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearCreator">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnProcedure"
+                style="@style/btnSolidRounded"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="0.7"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="8dp"
+                android:singleLine="true"
+                android:text="@string/lbl_procedure"
+                android:textAllCaps="false" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnIngredients"
+                style="@style/roundButtonLightBrown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="0.7"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="8dp"
+                android:singleLine="true"
+                android:text="@string/lbl_ingredients"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearRowprocedure" />
+
+        <ListView
+            android:id="@+id/listViewProcedure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="480dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCount" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

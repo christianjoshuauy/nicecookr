@@ -1,15 +1,21 @@
 package com.example.nicecook;
 
+import java.util.ArrayList;
+
 public class User {
     private String id;
     private String name;
+    private ArrayList<String> favorites;
+    private ArrayList<String> notes;
 
-    public User(){}
-
-    public User(String id, String name) {
+    public User(String id, String name, ArrayList<String> favorites, ArrayList<String> notes) {
         this.id = id;
         this.name = name;
+        this.favorites = favorites;
+        this.notes = notes;
     }
+
+    public User(){}
 
     public String getId() {
         return id;

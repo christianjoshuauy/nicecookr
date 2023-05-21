@@ -96,10 +96,21 @@
                 </LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/btnComputer"
+                    android:id="@+id/btnAddFav"
                     android:background="@drawable/rectangle_bg_white_a700_radius_12"
                     android:scaleType="fitCenter"
                     android:src="@drawable/img_computer"
+                    tools:ignore="ContentDescription"
+                    android:layout_height="24dp"
+                    android:layout_width="24dp"
+                    android:padding="5dp"/>
+
+                <ImageButton
+                    android:id="@+id/btnRemoveFav"
+                    android:background="@drawable/rectangle_bg_white_a700_radius_12"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone"
+                    android:src="@drawable/img_bookmark"
                     tools:ignore="ContentDescription"
                     android:layout_height="24dp"
                     android:layout_width="24dp"

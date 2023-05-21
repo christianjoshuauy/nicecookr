@@ -149,6 +149,12 @@
         <item name="android:fontFamily">@font/nunito</item>
         <item name="android:textFontWeight" tools:targetApi="p">800</item>
     </style>
+    <style name="roundButtonLightBrown">
+        <item name="android:background">@drawable/rectangle_radius_8_5</item>
+        <item name="android:textColor">@color/gray_700</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+    </style>
     <style name="groupStylecornerRadius_3">
         <item name="android:background">@drawable/rectangle_radius_8_5</item>
     </style>

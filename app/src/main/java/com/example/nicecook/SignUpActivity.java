@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView txtName;
     TextView txtEmail;
@@ -106,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             if (task.isSuccessful()) {
                                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
                                 String id = task.getResult().getUser().getUid();
-                                User user = new User(id, name);
+                                User user = new User(id, name, new ArrayList<>(), new ArrayList<>());
                                 databaseReference.push().setValue(user);
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully",
                                         Toast.LENGTH_SHORT).show();

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
@@ -33,6 +34,8 @@ import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,9 +50,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 
 public class BrowseActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -206,6 +211,7 @@ public class BrowseActivity extends AppCompatActivity {
     }
 
     private String uploadImage() {
+        final CountDownLatch latch = new CountDownLatch(1);
         SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
         Date now = new Date();
         String fileName = format.format(now) + ".jpg";
@@ -216,7 +222,7 @@ public class BrowseActivity extends AppCompatActivity {
                 ImageView imageView = dialog.findViewById(R.id.recipeImage);
                 imageView.setImageURI(null);
                 Toast.makeText(BrowseActivity.this, "Upload Successful", Toast.LENGTH_SHORT).show();
-
+                latch.countDown();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -224,6 +230,11 @@ public class BrowseActivity extends AppCompatActivity {
                 Toast.makeText(BrowseActivity.this, "Upload Failed", Toast.LENGTH_SHORT).show();
             }
         });
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return fileName;
     }
 
@@ -250,6 +261,28 @@ public class BrowseActivity extends AppCompatActivity {
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
         LinearLayout btnConfirm = dialog.findViewById(R.id.btnConfirm);
         LinearLayout btnUpload = dialog.findViewById(R.id.btnUpload);
+        AppCompatButton btnAddIngredients = dialog.findViewById(R.id.btnAddIngredients);
+        AppCompatButton btnAddProcedure = dialog.findViewById(R.id.btnAddProcedure);
+        ChipGroup chipGroupIng = dialog.findViewById(R.id.chipGroupIng);
+        ChipGroup chipGroupProc = dialog.findViewById(R.id.chipGroupProc);
+
+        btnAddIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String ingredient = recipeIngredients.getText().toString();
+                recipeIngredients.setText("");
+                addChip(chipGroupIng, ingredient);
+            }
+        });
+
+        btnAddProcedure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String step = recipeProcedure.getText().toString();
+                recipeProcedure.setText("");
+                addChip(chipGroupProc, step);
+            }
+        });
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,10 +291,20 @@ public class BrowseActivity extends AppCompatActivity {
                     String fileName = uploadImage();
                     String title = recipeName.getText().toString();
                     String author = user.getUid();
-                    String ingredients = recipeIngredients.getText().toString();
-                    String procedure = recipeProcedure.getText().toString();
+                    UUID randomUUID = UUID.randomUUID();
+                    String recipeID = randomUUID.toString();
+                    ArrayList<String> ingredients = new ArrayList<>();
+                    for(int i = 0; i < chipGroupIng.getChildCount(); i++) {
+                        Chip chip = (Chip) chipGroupIng.getChildAt(i);
+                        ingredients.add(chip.getText().toString());
+                    }
+                    ArrayList<String>  procedure = new ArrayList<>();
+                    for(int i = 0; i < chipGroupProc.getChildCount(); i++) {
+                        Chip chip = (Chip) chipGroupProc.getChildAt(i);
+                        procedure.add(chip.getText().toString());
+                    }
                     int duration = Integer.parseInt(recipeDuration.getText().toString());
-                    Recipe recipe = new Recipe(title, author, duration, ingredients, procedure, fileName);
+                    Recipe recipe = new Recipe(recipeID, title, author, duration, ingredients, procedure, fileName);
                     databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
                     databaseReference.push().setValue(recipe);
                     Toast.makeText(BrowseActivity.this, "Added Recipe", Toast.LENGTH_SHORT).show();
@@ -292,5 +335,20 @@ public class BrowseActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+    private void addChip(ChipGroup chipGroup, String text) {
+        if (!text.isEmpty()) {
+            Chip chip = new Chip(this);
+            chip.setText(text);
+            chip.setCloseIconVisible(true);
+            chip.setOnCloseIconClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chipGroup.removeView(chip);
+                }
+            });
+            chipGroup.addView(chip);
+        }
     }
 }

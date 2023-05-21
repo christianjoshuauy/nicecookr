@@ -44,6 +44,13 @@
 
         </LinearLayout>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:cardMaxElevation="8dp"
+            app:cardCornerRadius="16dp">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -80,6 +87,8 @@
             </LinearLayout>
 
         </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:orientation="vertical"
@@ -124,15 +133,39 @@
                 android:textColor="@color/black_900"
                 android:textSize="16sp"/>
 
-            <EditText
-                android:id="@+id/recipeIngredients"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/lbl_add_ingredient"
-                android:textColorHint="@color/bluegray_100"
-                android:textColor="@color/black_900"
-                android:padding="10dp"
-                style="@style/etSolidRoundedOutline"/>
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/recipeIngredients"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_add_ingredient"
+                    android:textColorHint="@color/bluegray_100"
+                    android:textColor="@color/black_900"
+                    style="@style/etSolidRoundedOutline"
+                    android:padding="10dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddIngredients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/btnSolidRounded"
+                    android:padding="5dp"
+                    android:layout_marginStart="7dp"
+                    android:text="@string/lbl_add_button"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupIng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recipeIngredients"
+                android:paddingTop="8dp" />
 
         </LinearLayout>
 
@@ -151,15 +184,39 @@
                 android:textColor="@color/black_900"
                 android:textSize="16sp"/>
 
-            <EditText
-                android:id="@+id/recipeProcedure"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/lbl_add_step"
-                android:textColorHint="@color/bluegray_100"
-                android:textColor="@color/black_900"
-                android:padding="10dp"
-                style="@style/etSolidRoundedOutline"/>
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/recipeProcedure"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lbl_add_ingredient"
+                    android:textColorHint="@color/bluegray_100"
+                    android:textColor="@color/black_900"
+                    style="@style/etSolidRoundedOutline"
+                    android:padding="10dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddProcedure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/btnSolidRounded"
+                    android:padding="5dp"
+                    android:layout_marginStart="7dp"
+                    android:text="@string/lbl_add_button"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupProc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recipeIngredients"
+                android:paddingTop="8dp" />
 
         </LinearLayout>
 

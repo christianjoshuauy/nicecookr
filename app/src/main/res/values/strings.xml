@@ -62,6 +62,7 @@
     <string name="lbl_password">Password</string>
     <string name="lbl_20_mins">20 mins</string>
     <string name="lbl_upload_image">Upload Image</string>
+    <string name="lbl_add_button">ADD +</string>
     <string name="msg_pilaf_sweet_wit">Pilaf sweet with lamb-and-raisins</string>
     <string name="lbl_yesterday">Yesterday</string>
     <string name="msg_lorem_ipsum_tem">Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?</string>

@@ -195,8 +195,8 @@ Tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu f
     <string name="lbl_green_chillis">Green Chillis</string>
     <string name="lbl_newest">Newest</string>
     <string name="lbl_10_mins">10 Mins</string>
-    <string name="lbl_start_cooking">Start
-Cooking</string>
+    <string name="lbl_start_cooking">Start Cooking</string>
+    <string name="lbl_calderetades">Kaldereta is a Filipino stew made with goat meat (or other meats) cooked with vegetables and liver paste.</string>
     <string name="msg_nicecookr_recip">NiceCookr.Recipe.co/burgir</string>
     <string name="lbl_total">Total</string>
     <string name="lbl_today">Today</string>

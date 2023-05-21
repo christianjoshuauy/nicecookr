@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearRowcaldereta"
+        style="@style/groupStylebluegray_100_75cornerRadius"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linearColumncaldereta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="9dp"
+            android:layout_weight="0.9"
+            android:gravity="start"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCaldereta"
+                style="@style/txtPoppinssemibold11_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/lbl_caldereta" />
+
+            <TextView
+                android:id="@+id/txtLabelOne"
+                style="@style/txtPoppinsregular11_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textsize="11sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/lbl_calderetades" />
+
+            <TextView
+                android:id="@+id/txtTime"
+                style="@style/txtPoppinsregular7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/lbl_10_mins_ago" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearIconTransantio"
+            style="@style/groupStyleorange_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="54dp"
+            android:layout_weight="0.1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/viewEllipseTwo"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="end"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/rectangle_bg_orange_500_border_white_a700_radius_2_5" />
+
+            <ImageView
+                android:id="@+id/imageFile"
+                android:layout_width="12dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="7dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_file" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

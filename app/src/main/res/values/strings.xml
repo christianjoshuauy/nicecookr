@@ -234,6 +234,7 @@ Tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu f
     <string name="lbl_by_james_reid">By James Reid</string>
     <string name="lbl_beverage">Beverage</string>
     <string name="lbl_all">All</string>
+    <string name="lbl_allnotes">All Notes</string>
     <string name="msg_chicken_meal_wi">Chicken meal with sauce</string>
     <string name="lbl_15_mins">15 Mins</string>
     <string name="lbl_adobo">Adobo</string>

@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NotesFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="143dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/img_arrowleft"
-        app:layout_constraintBottom_toTopOf="@+id/btn_all"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="53dp"
+        android:layout_width="73dp"
         android:layout_height="27dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="181dp"
         android:layout_marginBottom="18dp"
         android:fontFamily="@font/poppinssemibold"
         android:text="@string/lbl_notes"
@@ -36,40 +25,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_encrypted"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_unencrypted"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="119dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="50dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_unencrypted"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#4C2609"
-        android:textSize="11sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_encrypted"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_encrypted" />
-
-    <Button
-        android:id="@+id/btn_all"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="107dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="332dp"
-        android:backgroundTint="#4C2609"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_all"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerListnewyorkstrip"
-        app:layout_constraintEnd_toStartOf="@+id/btn_encrypted"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +34,7 @@
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="107dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="11dp"
         android:fontFamily="@font/poppinssemibold"
         android:text="@string/lbl_encrypted"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -89,13 +45,48 @@
         app:layout_constraintStart_toEndOf="@+id/btn_all"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <Button
+        android:id="@+id/btn_unencrypted"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="132dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="@string/lbl_unencrypted"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#4C2609"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerListcaldereta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_encrypted"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_all"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="87dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="1dp"
+        android:backgroundTint="#4C2609"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="@string/lbl_all"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_encrypted"
+        app:layout_constraintEnd_toStartOf="@+id/btn_encrypted"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="70dp"
-        android:layout_height="27dp"
-        android:layout_marginBottom="14dp"
+        android:layout_width="103dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_today"
+        android:text="@string/lbl_allnotes"
         android:textColor="@color/black_900"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerListcaldereta"
@@ -103,44 +94,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_encrypted" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_yesterday"
-        android:textColor="#121212"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerListnewyorkstrip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerListcaldereta" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerListnewyorkstrip"
+        android:id="@+id/recyclerListcaldereta"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-
-        android:layout_marginBottom="81dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_all"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_unencrypted" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerListcaldereta"
-        android:layout_width="339dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

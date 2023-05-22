@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Use the {@link NotesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotesFragment extends Fragment {
+public class NotesFragment extends Fragment implements RecyclerViewInterface{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,7 +80,7 @@ public class NotesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         list = new ArrayList<>();
-        myAdapter = new MyAdapter(getContext(),list);
+        myAdapter = new MyAdapter(getContext(),list,this);
         recyclerView.setAdapter(myAdapter);
 
         database.addValueEventListener(new ValueEventListener() {
@@ -99,5 +99,10 @@ public class NotesFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }

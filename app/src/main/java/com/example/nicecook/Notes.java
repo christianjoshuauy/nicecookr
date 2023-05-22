@@ -32,7 +32,7 @@ public class Notes extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new MyAdapter(this,list);
+        myAdapter = new MyAdapter(this,list, (RecyclerViewInterface) recyclerView);
         recyclerView.setAdapter(myAdapter);
 
         database.addValueEventListener(new ValueEventListener() {

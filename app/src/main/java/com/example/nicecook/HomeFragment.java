@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.appcompat.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment implements CustomAdapter.OnItemClickL
     DatabaseReference databaseReference;
     CustomAdapter customAdapter;
     ArrayList<Recipe> list;
+    SearchView searchViewSearch;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,6 +76,7 @@ public class HomeFragment extends Fragment implements CustomAdapter.OnItemClickL
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        searchViewSearch = view.findViewById(R.id.searchViewSearch);
         recyclerView = view.findViewById(R.id.recipeList);
         databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
         recyclerView.setHasFixedSize(true);
@@ -82,13 +85,33 @@ public class HomeFragment extends Fragment implements CustomAdapter.OnItemClickL
         customAdapter = new CustomAdapter(getContext(), list, this);
         recyclerView.setAdapter(customAdapter);
 
+        searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                searchRecipes(s);
+                return true;
+            }
+        });
+
+        searchRecipes("");
+        return view;
+    }
+
+    private void searchRecipes(String newText) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                    list.add(recipe);
+                    if(recipe.getTitle().toLowerCase().contains(newText.toLowerCase())) {
+                        list.add(recipe);
+                    }
                 }
                 customAdapter.notifyDataSetChanged();
             }
@@ -98,7 +121,6 @@ public class HomeFragment extends Fragment implements CustomAdapter.OnItemClickL
 
             }
         });
-        return view;
     }
 
     @Override

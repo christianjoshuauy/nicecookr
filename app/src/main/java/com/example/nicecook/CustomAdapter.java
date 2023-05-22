@@ -219,17 +219,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                        GenericTypeIndicator<ArrayList<String>> typeIndicator = new GenericTypeIndicator<ArrayList<String>>() {
-                        };
-                        ArrayList<String> favorites = childSnapshot.child("favorites").getValue(typeIndicator);
-                        if (favorites != null) {
-                            if (favorites.contains(recipeID)) {
-                                holder.btnAddFav.setVisibility(View.GONE);
-                                holder.btnRemoveFav.setVisibility(View.VISIBLE);
-                            } else {
-                                System.out.println("hello");
-                                holder.btnAddFav.setVisibility(View.VISIBLE);
-                                holder.btnRemoveFav.setVisibility(View.GONE);
+                        if(userID.equals(childSnapshot.child("id").getValue())) {
+                            GenericTypeIndicator<ArrayList<String>> typeIndicator = new GenericTypeIndicator<ArrayList<String>>() {
+                            };
+                            ArrayList<String> favorites = childSnapshot.child("favorites").getValue(typeIndicator);
+                            if (favorites != null) {
+                                if (favorites.contains(recipeID)) {
+                                    holder.btnAddFav.setVisibility(View.GONE);
+                                    holder.btnRemoveFav.setVisibility(View.VISIBLE);
+                                } else {
+                                    System.out.println("hello");
+                                    holder.btnAddFav.setVisibility(View.VISIBLE);
+                                    holder.btnRemoveFav.setVisibility(View.GONE);
+                                }
                             }
                         }
                     }

@@ -111,13 +111,15 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                        GenericTypeIndicator<ArrayList<String>> typeIndicator = new GenericTypeIndicator<ArrayList<String>>() {
-                        };
-                        ArrayList<String> favorites = childSnapshot.child("favorites").getValue(typeIndicator);
-                        if (favorites != null) {
-                            fav = favorites;
-                            showRecipes();
-                            break;
+                        if(userID.equals(childSnapshot.child("id").getValue())) {
+                            GenericTypeIndicator<ArrayList<String>> typeIndicator = new GenericTypeIndicator<ArrayList<String>>() {
+                            };
+                            ArrayList<String> favorites = childSnapshot.child("favorites").getValue(typeIndicator);
+                            if (favorites != null) {
+                                fav = favorites;
+                                showRecipes();
+                                break;
+                            }
                         }
                     }
                 }

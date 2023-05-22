@@ -23,6 +23,11 @@
             android:title="Notes"/>
 
         <item
+            android:id="@+id/nav_dictionary"
+            android:icon="@drawable/ic_outline_menu_book_24"
+            android:title="Dictionary"/>
+
+        <item
             android:id="@+id/nav_translate"
             android:icon="@drawable/ic_outline_g_translate_24"
             android:title="Translate"/>

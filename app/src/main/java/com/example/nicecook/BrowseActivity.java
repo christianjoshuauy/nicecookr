@@ -167,6 +167,10 @@ public class BrowseActivity extends AppCompatActivity {
                         replaceFragment(new NotesFragment());
                         bottomNavigationView.setSelectedItemId(R.id.notes);
                         break;
+                    case R.id.nav_dictionary:
+                        replaceFragment(new DictionaryFragment());
+                        bottomNavigationView.setSelectedItemId(0);
+                        break;
                     case R.id.nav_translate:
                         replaceFragment(new TranslateFragment());
                         bottomNavigationView.setSelectedItemId(0);

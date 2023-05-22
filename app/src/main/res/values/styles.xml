@@ -167,6 +167,13 @@
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
         <item name="android:background">@drawable/rectangle_bg_gray_900_radius_10</item>
     </style>
+    <style name="languageStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/white_A700</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textFontWeight" tools:targetApi="p">300</item>
+        <item name="android:background">@drawable/edittext_underline</item>
+        <!-- Add other attributes as needed -->
+    </style>
     <style name="groupStylecornerRadius_5">
         <item name="android:background">@drawable/rectangle_radius_9</item>
     </style>

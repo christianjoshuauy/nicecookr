@@ -3,6 +3,7 @@ package com.example.nicecook;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +21,6 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +42,7 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
     CustomAdapter customAdapter;
     ArrayList<Recipe> list;
     ArrayList<String> fav;
+    SearchView searchViewSearch;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -79,6 +80,7 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        searchViewSearch = view.findViewById(R.id.searchViewSearch);
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users");
         String userID = FirebaseAuth.getInstance().getUid();
         recyclerView = view.findViewById(R.id.recipeList);
@@ -90,6 +92,19 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
         customAdapter = new CustomAdapter(getContext(), list, this);
         recyclerView.setAdapter(customAdapter);
         showRecipes();
+
+        searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchRecipes(newText);
+                return true;
+            }
+        });
 
         if (userID != null) {
             userReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -125,6 +140,27 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
                     if(fav.contains(recipe.getRecipeID())) {
+                        list.add(recipe);
+                    }
+                }
+                customAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void searchRecipes(String newText) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                    if(recipe.getTitle().toLowerCase().contains(newText.toLowerCase())) {
                         list.add(recipe);
                     }
                 }

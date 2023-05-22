@@ -162,7 +162,7 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
                 list.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                    if(recipe.getTitle().toLowerCase().contains(newText.toLowerCase())) {
+                    if(fav.contains(recipe.getRecipeID()) && recipe.getTitle().toLowerCase().contains(newText.toLowerCase())) {
                         list.add(recipe);
                     }
                 }

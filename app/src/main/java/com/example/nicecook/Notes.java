@@ -20,7 +20,7 @@ public class Notes extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference database;
     MyAdapter myAdapter;
-    ArrayList<C_Notes> list;
+    ArrayList<Note> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class Notes extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data: snapshot.getChildren()){
-                    C_Notes notes = data.getValue(C_Notes.class);
+                    Note notes = data.getValue(Note.class);
                     list.add(notes);
                 }
                 myAdapter.notifyDataSetChanged();

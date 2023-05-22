@@ -6,6 +6,9 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -243,9 +246,18 @@ public class TranslateFragment extends Fragment {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(jsonBody.toString(), JSON);
+        String apiKey = "";
+        try {
+            ApplicationInfo applicationInfo = getActivity().getApplication().getPackageManager()
+                    .getApplicationInfo(getActivity().getApplication().getPackageName(), PackageManager.GET_META_DATA);
+            apiKey = applicationInfo.metaData.getString("OPENAI_KEY");
+            // Use the apiKey as needed
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/completions")
-                .header("Authorization", "Bearer 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")
+                .header("Authorization", "Bearer " + apiKey)
                 .post(body)
                 .build();
         client.newCall(request).enqueue(new Callback() {

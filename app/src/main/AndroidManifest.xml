@@ -22,6 +22,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".SignUpActivity"
             android:exported="false">
@@ -49,6 +50,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <meta-data
+            android:name="OPENAI_KEY"
+            android:value="${OPENAI_KEY}"/>
     </application>
 
 </manifest>

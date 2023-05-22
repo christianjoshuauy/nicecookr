@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CustomAdapter.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         list = new ArrayList<>();
-        customAdapter = new CustomAdapter(getContext(), list);
+        customAdapter = new CustomAdapter(getContext(), list, this);
         recyclerView.setAdapter(customAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -99,5 +99,10 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onItemClick(Recipe recipe) {
+
     }
 }

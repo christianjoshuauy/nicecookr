@@ -40,10 +40,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     ArrayList<Recipe> list;
     StorageReference storageReference;
     private String userID;
+    private OnItemClickListener listener;
 
-    public CustomAdapter(Context context, ArrayList<Recipe> list) {
+    public CustomAdapter(Context context, ArrayList<Recipe> list, OnItemClickListener listener) {
         this.context = context;
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -159,6 +161,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             public void onClick(View view) {
                 holder.btnAddFav.setVisibility(View.VISIBLE);
                 holder.btnRemoveFav.setVisibility(View.GONE);
+                listener.onItemClick(recipe);
                 String recipeID = recipe.getRecipeID();
                 userReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -169,7 +172,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                 GenericTypeIndicator<ArrayList<String>> typeIndicator = new GenericTypeIndicator<ArrayList<String>>() {};
                                 ArrayList<String> favorites = childSnapshot.child("favorites").getValue(typeIndicator);
                                 if (favorites != null) {
-                                    favorites.removeAll(Collections.singleton(recipeID));
+                                    favorites.remove(recipeID);
                                     userReference.child(childSnapshot.getKey()).child("favorites").setValue(favorites);
                                 }
                                 break;
@@ -238,5 +241,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 }
             });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Recipe recipe);
     }
 }

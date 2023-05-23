@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".OpenNotesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/titletextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lbl_notes"
+        android:textColor="@color/gray_903"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_margin="28dp"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/rec_round_brown">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtnotename"
+            android:background="#30FFFFFF"
+            android:textColor="@color/white"
+            android:padding="18dp"
+            android:layout_margin="10dp"
+        />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtdescription"
+            android:background="#30FFFFFF"
+            android:textColor="@color/white"
+            android:padding="18dp"
+            android:layout_margin="10dp"
+            android:lines="10"
+            android:gravity="top"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="start"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:id="@+id/btn_editnote"
+            style="@style/btnSolidRounded"
+            android:text="@string/txt_editnote" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_updatenote"
+            android:layout_marginStart="35dp"
+            style="@style/btnSolidRounded"
+            android:text="@string/txt_updatenote" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,15 +1,20 @@
 package com.example.nicecook;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,11 +39,15 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private boolean isButton1Clicked = true;
+    private boolean isButton2Clicked = false;
+    private boolean isButton3Clicked = false;
     RecyclerView recyclerView;
     DatabaseReference database;
     MyAdapter myAdapter;
     ArrayList<Note> list;
-
+    Button all, encrypted, unencrypted;
+    TextView whatnote;
     public NotesFragment() {
         // Required empty public constructor
     }
@@ -82,13 +91,77 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
         list = new ArrayList<>();
         myAdapter = new MyAdapter(getContext(),list,this);
         recyclerView.setAdapter(myAdapter);
+        all = view.findViewById(R.id.btn_all);
+        encrypted = view.findViewById(R.id.btn_encrypted);
+        unencrypted = view.findViewById(R.id.btn_unencrypted);
+        whatnote = view.findViewById(R.id.txtwhatnote);
+        showNotes(true, 0);
 
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isButton1Clicked = true;
+                isButton2Clicked = false;
+                isButton3Clicked = false;
+                updateButtonStyles();
+                showNotes(true, 0);
+                whatnote.setText("All Notes");
+                all.setEnabled(false);
+                unencrypted.setEnabled(true);
+                encrypted.setEnabled(true);
+            }
+        });
+
+        encrypted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isButton1Clicked = false;
+                isButton2Clicked = true;
+                isButton3Clicked = false;
+                updateButtonStyles();
+                showNotes(false, 1);
+                whatnote.setText("Encrypted Notes");
+                all.setEnabled(true);
+                unencrypted.setEnabled(true);
+                encrypted.setEnabled(false);
+
+            }
+        });
+
+        unencrypted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isButton1Clicked = false;
+                isButton2Clicked = false;
+                isButton3Clicked = true;
+                updateButtonStyles();
+                showNotes(false, 0);
+                whatnote.setText("Unencrypted Notes");
+                all.setEnabled(true);
+                unencrypted.setEnabled(false);
+                encrypted.setEnabled(true);
+            }
+        });
+        // onclick all given
+        // onclick sa encrypted showNotes(false, 1);
+        // onclick sa unencypt showNotes(false, 0);
+
+        return view;
+    }
+
+    private void showNotes(boolean isAll, int status) {
+        list.clear();
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data: snapshot.getChildren()){
                     Note notes = data.getValue(Note.class);
-                    list.add(notes);
+                    if(isAll || notes != null && notes.getStatus() == status) {
+                        list.add(notes);
+                    }
                 }
                 myAdapter.notifyDataSetChanged();
             }
@@ -98,7 +171,50 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
 
             }
         });
-        return view;
+    }
+
+    private void updateButtonStyles() {
+
+        if (isButton1Clicked && !isButton2Clicked && !isButton3Clicked) {
+            all.setBackgroundResource(R.drawable.rectangle_bg_gray_900_radius_10);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                all.setTextAppearance(R.style.btntobrown);
+            }
+            encrypted.setBackgroundResource(R.drawable.rectangle_radius_8_5);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                encrypted.setTextAppearance(R.style.btntowhite);
+            }
+            unencrypted.setBackgroundResource(R.drawable.rectangle_radius_8_5);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                unencrypted.setTextAppearance(R.style.btntowhite);
+            }
+        } else if (!isButton1Clicked && isButton2Clicked && !isButton3Clicked){
+            all.setBackgroundResource(R.drawable.rectangle_radius_8_5);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                all.setTextAppearance(R.style.btntowhite);
+            }
+            unencrypted.setBackgroundResource(R.drawable.rectangle_radius_8_5);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                unencrypted.setTextAppearance(R.style.btntowhite);
+            }
+            encrypted.setBackgroundResource(R.drawable.rectangle_bg_gray_900_radius_10);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                encrypted.setTextAppearance(R.style.btntobrown);
+            }
+        } else if (!isButton1Clicked && !isButton2Clicked && isButton3Clicked){
+            all.setBackgroundResource(R.drawable.rectangle_radius_8_5);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                all.setTextAppearance(R.style.btntowhite);
+            }
+            unencrypted.setBackgroundResource(R.drawable.rectangle_bg_gray_900_radius_10);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                unencrypted.setTextAppearance(R.style.btntobrown);
+            }
+            encrypted.setBackgroundResource(R.drawable.rectangle_radius_8_5);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                encrypted.setTextAppearance(R.style.btntowhite);
+            }
+        }
     }
 
     @Override

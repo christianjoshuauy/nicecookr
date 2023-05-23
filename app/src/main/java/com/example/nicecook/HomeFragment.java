@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements CustomAdapter.OnItemClickL
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         list = new ArrayList<>();
-        customAdapter = new CustomAdapter(getContext(), list, this);
+        customAdapter = new CustomAdapter(getContext(), list, this, true);
         recyclerView.setAdapter(customAdapter);
 
         searchViewSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

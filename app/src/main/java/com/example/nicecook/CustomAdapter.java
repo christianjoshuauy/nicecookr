@@ -36,16 +36,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
-    Context context;
-    ArrayList<Recipe> list;
-    StorageReference storageReference;
+    private Context context;
+    private ArrayList<Recipe> list;
+    private StorageReference storageReference;
     private String userID;
     private OnItemClickListener listener;
+    private boolean isVertical;
 
-    public CustomAdapter(Context context, ArrayList<Recipe> list, OnItemClickListener listener) {
+    public CustomAdapter(Context context, ArrayList<Recipe> list, OnItemClickListener listener, boolean isVertical) {
         this.context = context;
         this.list = list;
         this.listener = listener;
+        this.isVertical = isVertical;
     }
 
     @NonNull
@@ -99,13 +101,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             }
         });
 
-        if(position == getItemCount() - 1) {
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
-            params.bottomMargin = 200;
-            holder.itemView.setLayoutParams(params);
+        if(isVertical) {
+            if(position == getItemCount() - 1) {
+                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+                params.bottomMargin = 200;
+                holder.itemView.setLayoutParams(params);
+            } else {
+                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+                params.bottomMargin = (int) (15 * holder.itemView.getContext().getResources().getDisplayMetrics().density);
+                holder.itemView.setLayoutParams(params);
+            }
         } else {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
-            params.bottomMargin = (int) (15 * holder.itemView.getContext().getResources().getDisplayMetrics().density);
+            params.rightMargin = (int) (15 * holder.itemView.getContext().getResources().getDisplayMetrics().density);
             holder.itemView.setLayoutParams(params);
         }
 

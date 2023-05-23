@@ -89,7 +89,7 @@ public class FavoritesFragment extends Fragment implements CustomAdapter.OnItemC
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         list = new ArrayList<>();
         fav = new ArrayList<>();
-        customAdapter = new CustomAdapter(getContext(), list, this);
+        customAdapter = new CustomAdapter(getContext(), list, this, true);
         recyclerView.setAdapter(customAdapter);
         showRecipes();
 

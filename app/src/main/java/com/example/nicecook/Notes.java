@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Notes extends AppCompatActivity {
-    ArrayList<NotesModel> notesModels = new ArrayList<>();
+    ArrayList<Note> notesModels = new ArrayList<>();
     RecyclerView recyclerView;
     DatabaseReference database;
     MyAdapter myAdapter;

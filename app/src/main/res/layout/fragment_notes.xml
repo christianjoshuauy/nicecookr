@@ -5,106 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NotesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NotesFragment">
+
+        <!-- TODO: Update blank fragment layout -->
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="73dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="18dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_notes"
-        android:textColor="@color/black_900"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_encrypted"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="102dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:gravity="center|center_vertical"
+            android:text="@string/lbl_notes"
+            android:textAlignment="gravity"
+            android:textColor="@color/black_900"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_encrypted"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_encrypted"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="107dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="11dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_encrypted"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#4C2609"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/btn_unencrypted"
-        app:layout_constraintStart_toEndOf="@+id/btn_all"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <androidx.appcompat.widget.AppCompatButton
 
-    <Button
-        android:id="@+id/btn_unencrypted"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="132dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="50dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_unencrypted"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#4C2609"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerListcaldereta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_encrypted"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/btn_encrypted"
+            style="@style/roundButtonLightBrown"
+            android:layout_width="107dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:text="@string/lbl_encrypted"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#4C2609"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtwhatnote"
+            app:layout_constraintEnd_toStartOf="@+id/btn_unencrypted"
+            app:layout_constraintStart_toEndOf="@+id/btn_all"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/btn_all"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="87dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="1dp"
-        android:backgroundTint="#4C2609"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_all"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#FFFFFF"
-        android:textSize="11sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btn_encrypted"
-        app:layout_constraintEnd_toStartOf="@+id/btn_encrypted"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.appcompat.widget.AppCompatButton
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="103dp"
-        android:layout_height="26dp"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="@string/lbl_allnotes"
-        android:textColor="@color/black_900"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerListcaldereta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_encrypted" />
+            android:id="@+id/btn_unencrypted"
+            style="@style/roundButtonLightBrown"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerListcaldereta"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_unencrypted" />
+            android:layout_width="132dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="62dp"
+            android:layout_marginEnd="43dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:text="@string/lbl_unencrypted"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:textColor="#4C2609"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerListcaldereta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_encrypted"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_all"
+            style="@style/btnSolidRounded"
+            android:layout_width="87dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginEnd="1dp"
+
+            android:fontFamily="@font/poppinssemibold"
+            android:text="@string/lbl_all"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btn_encrypted"
+            app:layout_constraintEnd_toStartOf="@+id/btn_encrypted"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtwhatnote"
+            android:layout_width="156dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:text="@string/lbl_allnotes"
+            android:textAlignment="center"
+            android:textColor="@color/black_900"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerListcaldereta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_encrypted" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerListcaldereta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_unencrypted" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

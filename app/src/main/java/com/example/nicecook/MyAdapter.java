@@ -1,13 +1,19 @@
 package com.example.nicecook;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 
 import java.util.ArrayList;
 
@@ -36,6 +42,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         holder.notesName.setText(notes.getNotesName());
         holder.description.setText(notes.getDescription());
         holder.time.setText(notes.getTime());
+
+
     }
 
     @Override
@@ -46,6 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView notesName,description,time;
+        LinearLayout linearRowcaldereta;
 
         public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface){
             super(itemView);
@@ -53,17 +62,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
             description = itemView.findViewById(R.id.txtLabelOne);
             time = itemView.findViewById(R.id.txtTime);
 
+            linearRowcaldereta = itemView.findViewById(R.id.linearRowcaldereta);
+
+            linearRowcaldereta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("note", new Note(notesName.getText().toString(), description.getText().toString(), time.getText().toString()));
+                    OpenNotesFragment openNotesFragment = new OpenNotesFragment();
+                    openNotesFragment.setArguments(bundle);
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_layout, openNotesFragment).addToBackStack(null ).commit();
+                }
+            });
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(recyclerViewInterface != null){
+                    if(recyclerViewInterface != null) {
                         int pos = getAdapterPosition();
-                        if(pos!=RecyclerView.NO_POSITION){
+
+                        if(pos != RecyclerView.NO_POSITION){
                             recyclerViewInterface.onItemClick(pos);
                         }
                     }
                 }
             });
         }
+
     }
 }

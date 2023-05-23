@@ -6,6 +6,7 @@
 
     <LinearLayout
         android:id="@+id/linearRowcaldereta"
+        android:padding="5dp"
         style="@style/groupStylebluegray_100_75cornerRadius"
         android:layout_width="match_parent"
 

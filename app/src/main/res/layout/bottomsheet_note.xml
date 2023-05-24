@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Add Shopping Item"
+                android:text="Add Notes"
                 android:textAlignment="viewStart"
                 android:textColor="@color/black_900"
                 android:textSize="25dp"
@@ -59,17 +59,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item Name"
+                android:text="Title"
                 style="@style/txtPoppinssemibold14_3"
                 android:layout_marginBottom="7dp"
                 android:textColor="@color/black_900"
                 android:textSize="16sp"/>
 
             <EditText
-                android:id="@+id/itemName"
+                android:id="@+id/noteTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Item Name"
+                android:hint="Enter Note Title"
                 android:textColorHint="@color/bluegray_100"
                 android:textColor="@color/black_900"
                 android:padding="10dp"
@@ -86,45 +86,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quantity"
+                android:text="Content"
                 style="@style/txtPoppinssemibold14_3"
                 android:layout_marginBottom="7dp"
                 android:textColor="@color/black_900"
                 android:textSize="16sp"/>
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/itemQuantity"
+                android:id="@+id/noteContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="5 pcs / 10 lbs"
-                android:textColorHint="@color/bluegray_100"
-                android:textColor="@color/black_900"
-                style="@style/etSolidRoundedOutline"
-                android:padding="10dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Price"
-                style="@style/txtPoppinssemibold14_3"
-                android:layout_marginBottom="7dp"
-                android:textColor="@color/black_900"
-                android:textSize="16sp"/>
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/itemPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Price"
+                android:hint="Enter Note Content"
                 android:textColorHint="@color/bluegray_100"
                 android:textColor="@color/black_900"
                 style="@style/etSolidRoundedOutline"
@@ -141,7 +113,7 @@
             android:padding="10dp">
 
             <LinearLayout
-                android:id="@+id/btnAddItem"
+                android:id="@+id/btnAddNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/groupStylegray_900cornerRadius"

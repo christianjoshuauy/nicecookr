@@ -37,6 +37,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         holder.txtItem.setText(shoppingItem.getItemName());
         holder.txtQuantity.setText(shoppingItem.getQuantity());
         holder.txtPrice.setText("₱".concat(Double.toString(shoppingItem.getPrice())));
+        holder.checkbox.setChecked(false);
 
         holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

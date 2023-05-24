@@ -5,12 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,6 +48,7 @@ public class ProfileFragment extends Fragment implements CustomAdapter.OnItemCli
     ArrayList<Recipe> list;
     LinearLayoutManager linearLayoutManager;
     TextView txtUsername, txtEmail;
+    LinearLayout btnShoppingList;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -84,6 +88,7 @@ public class ProfileFragment extends Fragment implements CustomAdapter.OnItemCli
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         txtUsername = view.findViewById(R.id.txtUsername);
         txtEmail = view.findViewById(R.id.txtEmail);
+        btnShoppingList = view.findViewById(R.id.btnShoppingList);
         recyclerView = view.findViewById(R.id.recipeList);
         databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
         userReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -97,6 +102,15 @@ public class ProfileFragment extends Fragment implements CustomAdapter.OnItemCli
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userID = user.getUid();
         String email = user.getEmail();
+
+        btnShoppingList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShoppingListFragment openNotesFragment = new ShoppingListFragment();
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, openNotesFragment).addToBackStack(null ).commit();
+            }
+        });
 
         userReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -106,20 +107,33 @@ public class OpenNotesFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("noteName", noteName.getText().toString());
-//                map.put();
-            }
-//                // Get the updated note content from your input field
-//                String updatedNoteName = txtNoteName.getText().toString();
-//                String updatedDescription = txtDescription.getText().toString();
-//
-//                // Get the reference to your Firebase database
-//                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                DatabaseReference notesRef = database.getReference("notes");
-//
-//                // Update the note in Firebase
-//                notesRef.child().child("noteName").setValue(updatedNoteName)
+                DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Notes");
+                String noteId = FirebaseAuth.getInstance().getUid();
+                // Get the updated note content from your input field
+                String updatedNoteName = txtNoteName.getText().toString();
+                String updatedDescription = txtDescription.getText().toString();
+
+                // Get the reference to your Firebase database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference notesRef = database.getReference("Notes");
+
+                // Update the note in Firebase
+//                notesRef.child(noteId).child("noteName").setValue(updatedNoteName)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//                                // Note updated successfully
+//                                Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                // An error occurred while updating the note
+//                                Toast.makeText(getActivity(), "Failed to update note", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                notesRef.child(noteId).child("description").setValue(updatedDescription)
 //                        .addOnSuccessListener(new OnSuccessListener<Void>() {
 //                            @Override
 //                            public void onSuccess(Void aVoid) {
@@ -136,6 +150,15 @@ public class OpenNotesFragment extends Fragment {
 //                        });
             }
         });
+//            update.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Map<String, Object> map = new HashMap<>();
+//                    map.put("")
+//                }
+//            });
+        return view;
+    }
 
 
 }

@@ -9,15 +9,19 @@ public class Note implements Parcelable {
     String notesName;
     String description;
     String time;
+    String userId;
+    String noteId;
     int status;
     public Note() {
     }
 
-    public Note(String notesName, String description, String time,int status) {
+    public Note(String notesName, String description, String time,int status,String noteId, String userId) {
         this.notesName = notesName;
         this.description = description;
         this.time = time;
         this.status = status;
+        this.noteId = noteId;
+        this.userId = userId;
     }
 
     public Note(String notesName, String description, String time) {
@@ -74,5 +78,13 @@ public class Note implements Parcelable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getNoteId() {
+        return noteId;
     }
 }

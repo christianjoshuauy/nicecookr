@@ -260,83 +260,126 @@ public class BrowseActivity extends AppCompatActivity {
 
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.bottomsheet);
-
-        TextView recipeName = dialog.findViewById(R.id.recipeName);
-        TextView recipeIngredients = dialog.findViewById(R.id.recipeIngredients);
-        TextView recipeProcedure = dialog.findViewById(R.id.recipeProcedure);
-        TextView recipeDuration = dialog.findViewById(R.id.recipeDuration);
-        ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
-        LinearLayout btnConfirm = dialog.findViewById(R.id.btnConfirm);
-        LinearLayout btnUpload = dialog.findViewById(R.id.btnUpload);
-        AppCompatButton btnAddIngredients = dialog.findViewById(R.id.btnAddIngredients);
-        AppCompatButton btnAddProcedure = dialog.findViewById(R.id.btnAddProcedure);
-        ChipGroup chipGroupIng = dialog.findViewById(R.id.chipGroupIng);
-        ChipGroup chipGroupProc = dialog.findViewById(R.id.chipGroupProc);
-
-        btnAddIngredients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String ingredient = recipeIngredients.getText().toString();
-                recipeIngredients.setText("");
-                addChip(chipGroupIng, ingredient);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ArrayList<Fragment> fragments = (ArrayList<Fragment>) fragmentManager.getFragments();
+        boolean isShop = false;
+        for(Fragment fragment : fragments) {
+            if(fragment.isVisible() && fragment instanceof ShoppingListFragment) {
+                isShop = true;
+                break;
             }
-        });
+        }
+        if(isShop) {
+            dialog.setContentView(R.layout.bottomsheet_shop);
+            TextView itemName = dialog.findViewById(R.id.itemName);
+            TextView itemQuantity = dialog.findViewById(R.id.itemQuantity);
+            TextView itemPrice = dialog.findViewById(R.id.itemPrice);
+            LinearLayout btnAddItem = dialog.findViewById(R.id.btnAddItem);
 
-        btnAddProcedure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String step = recipeProcedure.getText().toString();
-                recipeProcedure.setText("");
-                addChip(chipGroupProc, step);
-            }
-        });
-
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    String fileName = uploadImage();
-                    String title = recipeName.getText().toString();
-                    String author = user.getUid();
+            btnAddItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String userID = user.getUid();
                     UUID randomUUID = UUID.randomUUID();
-                    String recipeID = randomUUID.toString();
-                    ArrayList<String> ingredients = new ArrayList<>();
-                    for(int i = 0; i < chipGroupIng.getChildCount(); i++) {
-                        Chip chip = (Chip) chipGroupIng.getChildAt(i);
-                        ingredients.add(chip.getText().toString());
+                    String itemID = randomUUID.toString();
+                    String name = itemName.getText().toString();
+                    String quantity = itemQuantity.getText().toString();
+                    double price = 0;
+                    try {
+                        price = Double.parseDouble(itemPrice.getText().toString());
+                        if(price <= 0) {
+                            Toast.makeText(BrowseActivity.this, "Price should be more than 0", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(BrowseActivity.this, "Enter a valid number", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                    ArrayList<String>  procedure = new ArrayList<>();
-                    for(int i = 0; i < chipGroupProc.getChildCount(); i++) {
-                        Chip chip = (Chip) chipGroupProc.getChildAt(i);
-                        procedure.add(chip.getText().toString());
-                    }
-                    int duration = Integer.parseInt(recipeDuration.getText().toString());
-                    Recipe recipe = new Recipe(recipeID, title, author, duration, ingredients, procedure, fileName);
-                    databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
-                    databaseReference.push().setValue(recipe);
-                    Toast.makeText(BrowseActivity.this, "Added Recipe", Toast.LENGTH_SHORT).show();
+
+                    ShoppingItem shoppingItem = new ShoppingItem(userID, itemID, name, quantity, price);
+                    databaseReference = FirebaseDatabase.getInstance().getReference("ShoppingList");
+                    databaseReference.push().setValue(shoppingItem);
+                    Toast.makeText(BrowseActivity.this, "Added Shopping Item", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                } catch (Exception e) {
-                    Toast.makeText(BrowseActivity.this, "Adding Failed", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            });
+        } else {
+            dialog.setContentView(R.layout.bottomsheet);
+            TextView recipeName = dialog.findViewById(R.id.recipeName);
+            TextView recipeIngredients = dialog.findViewById(R.id.recipeIngredients);
+            TextView recipeProcedure = dialog.findViewById(R.id.recipeProcedure);
+            TextView recipeDuration = dialog.findViewById(R.id.recipeDuration);
+            ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+            LinearLayout btnConfirm = dialog.findViewById(R.id.btnConfirm);
+            LinearLayout btnUpload = dialog.findViewById(R.id.btnUpload);
+            AppCompatButton btnAddIngredients = dialog.findViewById(R.id.btnAddIngredients);
+            AppCompatButton btnAddProcedure = dialog.findViewById(R.id.btnAddProcedure);
+            ChipGroup chipGroupIng = dialog.findViewById(R.id.chipGroupIng);
+            ChipGroup chipGroupProc = dialog.findViewById(R.id.chipGroupProc);
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectImage();
-            }
-        });
+            btnAddIngredients.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String ingredient = recipeIngredients.getText().toString();
+                    recipeIngredients.setText("");
+                    addChip(chipGroupIng, ingredient);
+                }
+            });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+            btnAddProcedure.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String step = recipeProcedure.getText().toString();
+                    recipeProcedure.setText("");
+                    addChip(chipGroupProc, step);
+                }
+            });
 
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        String fileName = uploadImage();
+                        String title = recipeName.getText().toString();
+                        String author = user.getUid();
+                        UUID randomUUID = UUID.randomUUID();
+                        String recipeID = randomUUID.toString();
+                        ArrayList<String> ingredients = new ArrayList<>();
+                        for(int i = 0; i < chipGroupIng.getChildCount(); i++) {
+                            Chip chip = (Chip) chipGroupIng.getChildAt(i);
+                            ingredients.add(chip.getText().toString());
+                        }
+                        ArrayList<String>  procedure = new ArrayList<>();
+                        for(int i = 0; i < chipGroupProc.getChildCount(); i++) {
+                            Chip chip = (Chip) chipGroupProc.getChildAt(i);
+                            procedure.add(chip.getText().toString());
+                        }
+                        int duration = Integer.parseInt(recipeDuration.getText().toString());
+                        Recipe recipe = new Recipe(recipeID, title, author, duration, ingredients, procedure, fileName);
+                        databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
+                        databaseReference.push().setValue(recipe);
+                        Toast.makeText(BrowseActivity.this, "Added Recipe", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    } catch (Exception e) {
+                        Toast.makeText(BrowseActivity.this, "Adding Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            btnUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    selectImage();
+                }
+            });
+
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+        }
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -118,36 +118,36 @@ public class OpenNotesFragment extends Fragment {
                 DatabaseReference notesRef = database.getReference("Notes");
 
                 // Update the note in Firebase
-//                notesRef.child(noteId).child("noteName").setValue(updatedNoteName)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-//                                // Note updated successfully
-//                                Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                // An error occurred while updating the note
-//                                Toast.makeText(getActivity(), "Failed to update note", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                notesRef.child(noteId).child("description").setValue(updatedDescription)
-//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                            @Override
-//                            public void onSuccess(Void aVoid) {
-//                                // Note updated successfully
-//                                Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
-//                            }
-//                        })
-//                        .addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                // An error occurred while updating the note
-//                                Toast.makeText(getActivity(), "Failed to update note", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
+                notesRef.child(noteId).child("noteName").setValue(updatedNoteName)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Note updated successfully
+                                Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // An error occurred while updating the note
+                                Toast.makeText(getActivity(), "Failed to update note", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                notesRef.child(noteId).child("description").setValue(updatedDescription)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Note updated successfully
+                                Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // An error occurred while updating the note
+                                Toast.makeText(getActivity(), "Failed to update note", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 //            update.setOnClickListener(new View.OnClickListener() {

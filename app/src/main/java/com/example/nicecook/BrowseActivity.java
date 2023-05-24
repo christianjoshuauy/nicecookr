@@ -14,11 +14,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,13 +46,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
@@ -336,7 +342,29 @@ public class BrowseActivity extends AppCompatActivity {
             btnAddNote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Note note = new Note();
+                    String userID = user.getUid();
+                    UUID randomUUID = UUID.randomUUID();
+                    String noteID = randomUUID.toString();
+                    String notesName = noteTitle.getText().toString();
+                    String description = noteContent.getText().toString();
+                    if(TextUtils.isEmpty(notesName)) {
+                        Toast.makeText(BrowseActivity.this, "Please input note title!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(TextUtils.isEmpty(description)) {
+                        Toast.makeText(BrowseActivity.this, "Please input note description!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.CANADA);
+                    Date now = new Date();
+                    String fileName = format.format(now);
+                    Note noteItem = new Note(noteID, userID, notesName, description, fileName, 0);
 
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Notes");
+                    databaseReference.push().setValue(noteItem);
+                    Toast.makeText(BrowseActivity.this, "Added New Notes!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
             });
         } else {

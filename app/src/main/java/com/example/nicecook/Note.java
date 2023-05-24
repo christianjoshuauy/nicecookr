@@ -5,9 +5,18 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+
 public class Note implements Parcelable {
     String notesName;
     String description;
+
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     String time;
     String userId;
     String noteId;
@@ -15,7 +24,7 @@ public class Note implements Parcelable {
     public Note() {
     }
 
-    public Note(String notesName, String description, String time,int status,String noteId, String userId) {
+    public Note(String noteId, String userId, String notesName, String description, String time, int status) {
         this.notesName = notesName;
         this.description = description;
         this.time = time;
@@ -69,7 +78,7 @@ public class Note implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(notesName);
         parcel.writeString(description);
-        parcel.writeString(time);
+        parcel.writeString(String.valueOf(time));
     }
 
     public int getStatus() {

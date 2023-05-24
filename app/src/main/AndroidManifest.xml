@@ -16,9 +16,6 @@
         android:theme="@style/Theme.Nicecook"
         tools:targetApi="31">
         <activity
-            android:name=".NotesOpen"
-            android:exported="false" />
-        <activity
             android:name=".BrowseActivity"
             android:exported="false">
             <meta-data

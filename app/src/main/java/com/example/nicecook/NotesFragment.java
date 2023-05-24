@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +45,8 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
     private boolean isButton2Clicked = false;
     private boolean isButton3Clicked = false;
     RecyclerView recyclerView;
+    FirebaseUser user;
+    FirebaseAuth auth;
     DatabaseReference database;
     MyAdapter myAdapter;
     ArrayList<Note> list;
@@ -77,6 +81,8 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
     }
 
     @Override
@@ -133,7 +139,6 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
         unencrypted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 isButton1Clicked = false;
                 isButton2Clicked = false;
                 isButton3Clicked = true;
@@ -155,11 +160,12 @@ public class NotesFragment extends Fragment implements RecyclerViewInterface{
     private void showNotes(boolean isAll, int status) {
         list.clear();
         database.addValueEventListener(new ValueEventListener() {
+            String userID = user.getUid();
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data: snapshot.getChildren()){
                     Note notes = data.getValue(Note.class);
-                    if(isAll || notes != null && notes.getStatus() == status) {
+                    if(isAll || notes != null && notes.getStatus() == status ) {
                         list.add(notes);
                     }
                 }

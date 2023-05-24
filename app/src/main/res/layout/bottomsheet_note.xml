@@ -67,13 +67,13 @@
 
             <EditText
                 android:id="@+id/noteTitle"
+                style="@style/etSolidRoundedOutline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Note Title"
-                android:textColorHint="@color/bluegray_100"
-                android:textColor="@color/black_900"
                 android:padding="10dp"
-                style="@style/etSolidRoundedOutline"/>
+                android:textColor="@color/black_900"
+                android:textColorHint="@color/bluegray_100" />
 
         </LinearLayout>
 

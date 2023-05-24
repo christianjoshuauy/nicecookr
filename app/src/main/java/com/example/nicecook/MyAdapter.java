@@ -1,6 +1,7 @@
 package com.example.nicecook;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,10 +42,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         Note notes = list.get(position);
         holder.notesName.setText(notes.getNotesName());
         holder.description.setText(notes.getDescription());
-        holder.time.setText(notes.getTime());
+        holder.time.setText((CharSequence) notes.getTime());
 
-
+        holder.itemView.setOnClickListener((v)->{
+            Intent intent = new Intent(context, OpenNotesFragment.class);
+            intent.putExtra("title", notes.getNotesName());
+            intent.putExtra("content", notes.getDescription());
+//            String docId = this.getSnapshots().getSnapshot(position).getId();
+//            intent.putExtra("docId", docId);
+            context.startActivity(intent);
+        });
     }
+
+
 
     @Override
     public int getItemCount() {

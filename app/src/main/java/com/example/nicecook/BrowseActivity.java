@@ -263,10 +263,16 @@ public class BrowseActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         ArrayList<Fragment> fragments = (ArrayList<Fragment>) fragmentManager.getFragments();
         boolean isShop = false;
+        boolean isNote = false;
         for(Fragment fragment : fragments) {
-            if(fragment.isVisible() && fragment instanceof ShoppingListFragment) {
-                isShop = true;
-                break;
+            if(fragment.isVisible()) {
+                if(fragment instanceof ShoppingListFragment) {
+                    isShop = true;
+                    break;
+                } else if(fragment instanceof NotesFragment) {
+                    isNote = true;
+                    break;
+                }
             }
         }
         if(isShop) {
@@ -275,6 +281,14 @@ public class BrowseActivity extends AppCompatActivity {
             TextView itemQuantity = dialog.findViewById(R.id.itemQuantity);
             TextView itemPrice = dialog.findViewById(R.id.itemPrice);
             LinearLayout btnAddItem = dialog.findViewById(R.id.btnAddItem);
+            ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
 
             btnAddItem.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -284,6 +298,7 @@ public class BrowseActivity extends AppCompatActivity {
                     String itemID = randomUUID.toString();
                     String name = itemName.getText().toString();
                     String quantity = itemQuantity.getText().toString();
+                    ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
                     double price = 0;
                     try {
                         price = Double.parseDouble(itemPrice.getText().toString());
@@ -301,6 +316,27 @@ public class BrowseActivity extends AppCompatActivity {
                     databaseReference.push().setValue(shoppingItem);
                     Toast.makeText(BrowseActivity.this, "Added Shopping Item", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                }
+            });
+        } else if(isNote) {
+            dialog.setContentView(R.layout.bottomsheet_note);
+            TextView noteTitle = dialog.findViewById(R.id.noteTitle);
+            TextView noteContent = dialog.findViewById(R.id.noteContent);
+            LinearLayout btnAddNote = dialog.findViewById(R.id.btnAddNote);
+            ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            // Diri edit
+            btnAddNote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
                 }
             });
         } else {

@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:textSize="23sp"
                 android:layout_width="wrap_content"
                 android:singleLine="true"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="40dp"
                 android:layout_width="wrap_content"
                 android:singleLine="true"
                 android:text="@string/lbl_email"
@@ -123,9 +123,10 @@
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:visibility="gone"
-                    android:layout_marginLeft="150dp"
+                    android:layout_gravity="center"
                     android:indeterminateTint="@color/white"
-                    android:layout_width="wrap_content"
+                    android:paddingVertical="6dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <ImageView android:id="@+id/imageArrowright"
                     android:layout_height="11dp"
@@ -143,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:layout_width="wrap_content" android:orientation="horizontal">
                 <View android:background="@color/bluegray_100"
                     android:id="@+id/lineLineFive"
@@ -158,7 +159,7 @@
                     android:layout_weight="0.45"
                     android:gravity="center"
                     android:layout_width="0dp" android:singleLine="true"
-                    android:text="@string/lbl_or_sign_in_with"
+                    android:text="Or Sign Up"
                     style="@style/txtPoppinsmedium11" tools:text="@string/lbl_or_sign_in_with"/>
                 <View android:background="@color/bluegray_100"
                     android:id="@+id/lineLineSix"
@@ -168,32 +169,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="0.28" android:layout_width="0dp"/>
             </LinearLayout>
-            <LinearLayout android:gravity="center_vertical"
-                android:id="@+id/linearRowicons8googletwo"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="19dp"
-                android:layout_width="wrap_content" android:orientation="horizontal">
-                <ImageButton
-                    android:background="@drawable/rectangle_bg_white_a700_radius_10"
-                    android:id="@+id/btnIcons8googleTwo"
-                    android:layout_height="44dp"
-                    android:layout_width="44dp"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="12dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/img_icons8google2" tools:ignore="ContentDescription"/>
-                <ImageButton
-                    android:background="@drawable/rectangle_bg_white_a700_radius_10"
-                    android:id="@+id/btnFacebook"
-                    android:layout_height="44dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_width="44dp"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="12dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/img_facebook" tools:ignore="ContentDescription"/>
-            </LinearLayout>
+
             <TextView android:ellipsize="end"
                 android:id="@+id/txtSignUp"
                 android:layout_gravity="center_horizontal"

@@ -107,7 +107,7 @@
 
                 <ImageButton
                     android:id="@+id/btnRemoveFav"
-                    android:background="@drawable/rectangle_bg_white_a700_radius_12"
+                    android:background="@drawable/rectangle_bg_orange_100_radius_8"
                     android:scaleType="fitCenter"
                     android:visibility="gone"
                     android:src="@drawable/img_bookmark"

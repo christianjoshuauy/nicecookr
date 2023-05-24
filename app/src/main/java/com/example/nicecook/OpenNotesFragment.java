@@ -2,6 +2,7 @@ package com.example.nicecook;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
@@ -11,6 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,8 +102,40 @@ public class OpenNotesFragment extends Fragment {
                 update.setEnabled(true);
             }
         });
-        return view;
-    }
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("noteName", noteName.getText().toString());
+//                map.put();
+            }
+//                // Get the updated note content from your input field
+//                String updatedNoteName = txtNoteName.getText().toString();
+//                String updatedDescription = txtDescription.getText().toString();
+//
+//                // Get the reference to your Firebase database
+//                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                DatabaseReference notesRef = database.getReference("notes");
+//
+//                // Update the note in Firebase
+//                notesRef.child().child("noteName").setValue(updatedNoteName)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//                                // Note updated successfully
+//                                Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                // An error occurred while updating the note
+//                                Toast.makeText(getActivity(), "Failed to update note", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+            }
+        });
 
 
 }

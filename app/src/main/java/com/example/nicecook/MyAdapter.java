@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         holder.description.setText(notes.getDescription());
         holder.time.setText(notes.getTime());
 
-
+        
     }
 
     @Override

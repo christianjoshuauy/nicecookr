@@ -52,13 +52,5 @@ public class Notes extends AppCompatActivity {
             }
         });
     }
-    private void onItemClick(int pos){
-        Intent intent = new Intent(Notes.this, NotesOpen.class);
 
-        intent.putExtra("notesName", list.get(pos).getNotesName());
-        intent.putExtra("description", list.get(pos).getDescription());
-        intent.putExtra("time", list.get(pos).getTime());
-
-        startActivity(intent);
-    }
 }
